@@ -4,10 +4,15 @@ import React from "react";
 // That way we don't have to define them all individually
 function DeleteBtn(props) {
   return (
-    <span className="delete-btn" {...props} role="button" tabIndex="0">
-      ✗
-    </span>
+    <button 
+      className="btn btn-danger" 
+      id={props._id} 
+      onClick={() => deleteSaved(props._id)}>
+        Delete
+    </button>
   );
 }
 
 export default DeleteBtn;
+
+

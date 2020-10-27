@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
 
 function Saved() {
-  const [savedBooks, setBooks] = useState([])
+  const [savedBooks, setSavedBooks] = useState([])
 
   useEffect(() => {
-    loadBooks()
-  }, [])
+    loadBooks();
+  }, []);
 
   function loadBooks() {
     API.getSaved()
-      .then(res => 
-        setBooks(res.data)
-      )
-      .catch(err => console.log(err));
+      .then((response) => {
+        setSavedBooks(response.data);
+      }).catch(err => console.log(err));
   };
 
   function deleteBook(id) {
@@ -30,23 +27,16 @@ function Saved() {
   return (
     <Container fluid>
       <Jumbotron>
-        <h3>Your Saved Books</h3>
+        <h1>Your Shelf</h1>
       </Jumbotron>
       <Row>
         <Col size="md-6 sm-12">
           {savedBooks.length ? (
-          <List>
-            {savedBooks.map(book => (
-              <ListItem key={book._id}>
-                <Link to={"/saved/:id"}>
-                  <strong>
-                    {book.title} by {book.author}
-                  </strong>
-                </Link>
-                <DeleteBtn onClick={() => deleteBook(book._id)} />
-              </ListItem>
-            ))}
-          </List>
+            savedBooks.map(book => {
+              return (
+                <Card data={book} key={book._id} button={DeleteBtn} />
+              )
+            })
           ) : (
           <h3>No Results to Display</h3>
           )}
