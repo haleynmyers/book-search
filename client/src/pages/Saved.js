@@ -3,6 +3,7 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import Card from "../components/Card";
 
 function Saved() {
   const [savedBooks, setSavedBooks] = useState([])

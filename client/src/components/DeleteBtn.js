@@ -6,8 +6,7 @@ function DeleteBtn(props) {
   return (
     <button 
       className="btn btn-danger" 
-      id={props._id} 
-      onClick={() => deleteSaved(props._id)}>
+      id={props._id} >
         Delete
     </button>
   );

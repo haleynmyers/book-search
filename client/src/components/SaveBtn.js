@@ -4,8 +4,7 @@ function SaveBtn(props) {
   return (
     <button 
       className="btn btn-info" 
-      id={props._id} 
-      onClick={() => saveBook(props._id)}>
+      id={props._id} >
         Save
     </button>
   );
