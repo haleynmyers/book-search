@@ -28,9 +28,5 @@
     "express": "^4.16.3",
     "if-env": "^1.0.4",
     "mongoose": "^5.10.9"
-  },
-  "bugs": {
-    "url": "https://github.com/haleynmyers/book-search/issues"
-  },
-  "homepage": "https://github.com/haleynmyers/book-search#readme"
+  }
 }

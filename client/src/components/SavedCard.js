@@ -3,7 +3,6 @@ import API from "../utils/API";
 
 function Card(props) {
   let d = props.data;
-  console.log(d);
   let image;
   if (d.imageLinks) {
     image = d.imageLinks.thumbnail
@@ -17,39 +16,38 @@ function Card(props) {
     authors: d.authors,
     description: d.description,
     image: image,
-    link: d.infoLink,
+    link: d.previewLink,
     publishedDate: d.publishedDate,
-    publisher: d.publisher,
+    rating: d.averageRating,
     categories: d.categories,
     pageCount: d.pageCount
   }
 
-  function save() {
-    API.saveBook(bookData)
+  function deleteSaved(id) {
+    API.deleteBook(id)
       .then(res => console.log(res))
       .catch(err => console.log(err))
-      alert("Saved!");
   }
 
   return (
     <div className="card">
       <div className="card-header">
-        <h2 className="card-title">{d.title}</h2>
-        <h5 className="card-text">By: {d.authors}</h5>
+        <h2 className="card-title">{props.title}</h2>
+        <h5 className="card-text">By: {props.authors}</h5>
       </div>
       <div className="card-body">
           <div className="row">
             <div className="col-lg-4">
-              <img src={image} className="card-img-left" alt={d.title} />
+              <img src={props.image} className="card-img-left" alt={props.title} />
               <br />
               <a href={d.infoLink} target="_blank" rel="noopener noreferrer">
                 <button className="btn btn-info">
                   Info
                 </button>
               </a> 
-              <button className="btn btn-info" id={props._id} onClick={() => save()} >
-                Save
-              </button>              
+              <button className="btn btn-danger" id={props._id} onClick={() => deleteSaved()} >
+                Delete
+              </button>  
             </div>
             <div className="col-lg-8">
               <h5>Description:</h5>

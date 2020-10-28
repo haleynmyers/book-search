@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
-import Card from "../components/Card";
+import SavedCard from "../components/SavedCard";
 
 function Saved() {
   const [savedBooks, setSavedBooks] = useState([])
 
   useEffect(() => {
-    loadBooks();
+    API.getBooks()
+      .then((res) => {
+        setSavedBooks(res.data);
+        console.log(savedBooks);
+      })
+      .catch((err) => console.log(err));
   }, []);
-
-  function loadBooks() {
-    API.getSaved()
-      .then((response) => {
-        setSavedBooks(response.data);
-      }).catch(err => console.log(err));
-  };
-
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then(res => loadBooks())
-      .catch(err => console.log(err));
-  }; 
 
   return (
     <Container fluid>
@@ -33,9 +24,9 @@ function Saved() {
       <Row>
         <Col size="md-6 sm-12">
           {savedBooks.length ? (
-            savedBooks.map(book => {
+            savedBooks.map((book, index) => {
               return (
-                <Card data={book} key={book._id} button={DeleteBtn} />
+                <SavedCard key={index} {...book}  />
               )
             })
           ) : (

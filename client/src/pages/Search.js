@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Card from "../components/Card";
-import SaveBtn from "../components/SaveBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 
@@ -17,11 +16,10 @@ function Search() {
     API.getGoogle(search)
       .then((res) => {
         setBooks(res.data.items);
-      })
-      .catch((err) => console.log(err));
+      }).catch((err) => console.log(err));
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = function(event) {
     event.preventDefault();
     loadBooks(result);
     setResult("");
@@ -34,16 +32,13 @@ function Search() {
           <Jumbotron>
             <h1>Search Books</h1>
           </Jumbotron>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               className="form-control"
-              onChange={(e) => setResult(e.target.value)}
-              name="input"
+              type="search"
               placeholder="Search a title or author"
+              onChange={(e) => setResult(e.target.value)}
             />
-            <button className="btn btn-info" onSubmit={handleSubmit}>
-              Submit
-            </button>
           </form>
         </Col>
       </Row>
@@ -51,7 +46,7 @@ function Search() {
         <Col size="md-8 sm-12">
           {books.length ? (
             books.map((book) => (
-                <Card data={book.info} key={book.id} button={SaveBtn} />
+                <Card data={book.volumeInfo} key={book.id} />
             ))
           ) : (
             <h3>No Results to Display</h3>
