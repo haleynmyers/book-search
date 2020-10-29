@@ -1,31 +1,11 @@
 import React from "react";
 import API from "../utils/API";
 
-function Card(props) {
-  let d = props.data;
-  let image;
-  if (d.imageLinks) {
-    image = d.imageLinks.thumbnail
-  }
-  else {
-    image = "https://via.placeholder.com/150"
-  }
-
-  let bookData = {
-    title: d.title,
-    authors: d.authors,
-    description: d.description,
-    image: image,
-    link: d.previewLink,
-    publishedDate: d.publishedDate,
-    rating: d.averageRating,
-    categories: d.categories,
-    pageCount: d.pageCount
-  }
-
+function SavedCard(props) {
+  
   function deleteSaved(id) {
     API.deleteBook(id)
-      .then(res => console.log(res))
+      .then(res => {window.location.reload();})
       .catch(err => console.log(err))
   }
 
@@ -40,26 +20,26 @@ function Card(props) {
             <div className="col-lg-4">
               <img src={props.image} className="card-img-left" alt={props.title} />
               <br />
-              <a href={d.infoLink} target="_blank" rel="noopener noreferrer">
+              <a href={props.infoLink} target="_blank" rel="noopener noreferrer">
                 <button className="btn btn-info">
                   Info
                 </button>
               </a> 
-              <button className="btn btn-danger" id={props._id} onClick={() => deleteSaved()} >
+              <button className="btn delete btn-danger" id={props._id} onClick={() => deleteSaved(props._id)} >
                 Delete
               </button>  
             </div>
             <div className="col-lg-8">
               <h5>Description:</h5>
-              <p className="card-text">{d.description}</p>
+              <p className="card-text">{props.description}</p>
               <h5>Published:</h5>
-              <p className="card-text">{d.publishedDate}</p>
+              <p className="card-text">{props.publishedDate}</p>
               <h5>Publisher:</h5>
-              <p className="card-text">{d.publisher}</p>
+              <p className="card-text">{props.publisher}</p>
               <h5>Category:</h5>
-              <p className="card-text">{d.categories}</p>
+              <p className="card-text">{props.categories}</p>
               <h5>Page Count:</h5>
-              <p>{d.pageCount}</p>
+              <p>{props.pageCount}</p>
             </div>
           </div>
         </div>
@@ -67,4 +47,4 @@ function Card(props) {
   )
 }
 
-export default Card;
+export default SavedCard;

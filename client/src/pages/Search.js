@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 
-function Search() {
+const Search = () => {
   const [books, setBooks] = useState([]);
   const [result, setResult] = useState({});
 

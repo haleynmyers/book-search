@@ -24,7 +24,7 @@ function Card(props) {
     pageCount: d.pageCount
   }
 
-  function save() {
+  function saveIt() {
     API.saveBook(bookData)
       .then(res => console.log(res))
       .catch(err => console.log(err))
@@ -46,8 +46,9 @@ function Card(props) {
                 <button className="btn btn-info">
                   Info
                 </button>
+                {"   "}
               </a> 
-              <button className="btn btn-info" id={props._id} onClick={() => save()} >
+              <button className="btn btn-info save" onClick={() => saveIt()} >
                 Save
               </button>              
             </div>

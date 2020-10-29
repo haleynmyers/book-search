@@ -25,9 +25,7 @@ function Saved() {
         <Col size="md-6 sm-12">
           {savedBooks.length ? (
             savedBooks.map((book, index) => {
-              return (
-                <SavedCard key={index} {...book}  />
-              )
+              <SavedCard key={index} {...book}  />
             })
           ) : (
           <h3>No Results to Display</h3>
